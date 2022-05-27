@@ -1,0 +1,2 @@
+INSERT INTO role_table VALUES (1, 'ROLE_USER');
+INSERT INTO role_table VALUES (2, 'ROLE_ADMIN');
