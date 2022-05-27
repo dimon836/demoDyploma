@@ -23,6 +23,7 @@ public class AuthController {
         UserEntity user = new UserEntity();
         user.setPassword(registrationRequest.getPassword());
         user.setLogin(registrationRequest.getLogin());
+        user.setEmail(registrationRequest.getEmail());
         userService.saveUser(user);
         return "OK";
     }
@@ -31,6 +32,6 @@ public class AuthController {
     public AuthResponse auth(@RequestBody AuthRequest request) {
         UserEntity userEntity = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponse(token);
+        return new AuthResponse(userEntity.getId(), userEntity.getLogin(), token);
     }
 }

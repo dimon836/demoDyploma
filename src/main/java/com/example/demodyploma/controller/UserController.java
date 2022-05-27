@@ -24,12 +24,6 @@ public class UserController {
         return userEntityRepo.findAll();
     }
 
-    @PostMapping("/users")
-    ResponseEntity<Void> createUser(@RequestBody UserEntity user) {
-        userService.saveUser(user);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/users/{login}")
     UserEntity one(@PathVariable String login) throws UserNotFoundException {
         return userService.findByLogin(login);
