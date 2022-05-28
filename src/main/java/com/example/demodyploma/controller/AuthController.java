@@ -4,9 +4,7 @@ import com.example.demodyploma.config.jwt.JwtProvider;
 import com.example.demodyploma.service.UserService;
 import com.example.demodyploma.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 

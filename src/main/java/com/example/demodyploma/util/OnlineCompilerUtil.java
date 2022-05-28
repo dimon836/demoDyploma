@@ -6,14 +6,20 @@ import java.io.*;
 
 public class OnlineCompilerUtil {
 
+    private static String tmpFilename = "MainClass";
+
+    public static String getTmpFilename() {
+        return tmpFilename;
+    }
+
     public static String compileCode(UserEntity userEntity, String input) {
         return compileCode(input);
     }
 
     private static String compileCode(String input){
-        String path = "src\\main\\resources\\tmp";
+        String path = "src\\main\\resources\\tmp\\";
         try {
-            PrintWriter printWriter = new PrintWriter(path + "\\temporaryFile.java");
+            PrintWriter printWriter = new PrintWriter(path + getTmpFilename() + ".java");
             printWriter.println(input);
             printWriter.close();
             System.out.println("Successfully written to the file.");
@@ -22,9 +28,9 @@ public class OnlineCompilerUtil {
             e.printStackTrace();
         }
         try {
-            runProcess("javac " + path + "\\temporaryFile.java");
+            runProcess("javac " + path + getTmpFilename() + ".java");
             System.out.println("**********");
-            return runProcess("java -cp " + path + " temporaryFile qqq");
+            return runProcess("java -cp " + path + " " + getTmpFilename() + " "); // TODO add args
         } catch (Exception e) {
             e.printStackTrace();
         }
