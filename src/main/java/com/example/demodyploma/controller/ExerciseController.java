@@ -2,7 +2,9 @@ package com.example.demodyploma.controller;
 
 import com.example.demodyploma.entity.ExerciseEntity;
 import com.example.demodyploma.repository.ExerciseEntityRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,19 +21,18 @@ public class ExerciseController {
         this.exerciseEntityRepository = exerciseEntityRepository;
     }
 
-    @GetMapping("/getExercises")
-    public List<ExerciseEntity> getExercises() {
-        return exerciseEntityRepository.findAll();
+    @GetMapping(value = "/getExercises", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ExerciseEntity>> getExercises() {
+        return ResponseEntity.ok(exerciseEntityRepository.findAll());
     }
 
-    @GetMapping("/getExercises/{id}")
+    @GetMapping(value = "/getExercises/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<ExerciseEntity> getExercise(@PathVariable Long id) {
         return exerciseEntityRepository.findById(id);
     }
 
-    @PutMapping("/getExercises")
-    public ResponseEntity<ExerciseEntity> changeExercise(@RequestBody ExerciseEntity exercise) {
+    @PutMapping("/replaceExercise")
+    public void replaceExercise(@RequestBody ExerciseEntity exercise) {
         exerciseEntityRepository.save(exercise);
-        return ResponseEntity.ok().body(exercise);
     }
 }
