@@ -1,11 +1,15 @@
 package com.example.demodyploma.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "exercise")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class ExerciseEntity {
     @Id
