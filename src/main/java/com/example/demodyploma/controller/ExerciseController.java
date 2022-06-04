@@ -31,13 +31,13 @@ public class ExerciseController {
         return exerciseEntityRepository.findById(id);
     }
 
-    @PutMapping
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExerciseEntity> putExercise(@RequestBody ExerciseEntity exercise) {
         exerciseEntityRepository.save(exercise);
         return ResponseEntity.ok().body(exercise);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
         exerciseEntityRepository.deleteById(id);
         return ResponseEntity.ok().build();
