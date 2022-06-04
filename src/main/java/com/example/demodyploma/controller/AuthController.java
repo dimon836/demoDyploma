@@ -30,6 +30,6 @@ public class AuthController {
     public AuthResponse auth(@RequestBody AuthRequest request) {
         UserEntity userEntity = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponse(userEntity.getId(), userEntity.getLogin(), token);
+        return new AuthResponse(userEntity.getId(), userEntity.getLogin(), token, userEntity.getRoleEntity());
     }
 }
