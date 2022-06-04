@@ -36,6 +36,7 @@ public class UserController {
                     userDto1.setLogin(newUser.getLogin());
                     userDto1.setEmail(newUser.getEmail());
                     userDto1.setPassword(newUser.getPassword());
+                    userDto1.setRoleEntity(newUser.getRoleEntity());
                     return userEntityRepo.save(userDto1);
                 })
                 .orElseGet(() -> {
