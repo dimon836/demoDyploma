@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("/exercise")
 @RestController
 public class ExerciseController {
 
@@ -20,23 +21,23 @@ public class ExerciseController {
         this.exerciseEntityRepository = exerciseEntityRepository;
     }
 
-    @GetMapping(value = "/exercise", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExerciseEntity>> getExercises() {
         return ResponseEntity.ok(exerciseEntityRepository.findAll());
     }
 
-    @GetMapping(value = "/exercise/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<ExerciseEntity> getExercise(@PathVariable Long id) {
         return exerciseEntityRepository.findById(id);
     }
 
-    @PutMapping("/exercise")
+    @PutMapping
     public ResponseEntity<ExerciseEntity> putExercise(@RequestBody ExerciseEntity exercise) {
         exerciseEntityRepository.save(exercise);
         return ResponseEntity.ok().body(exercise);
     }
 
-    @DeleteMapping("/exercise/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
         exerciseEntityRepository.deleteById(id);
         return ResponseEntity.ok().build();
