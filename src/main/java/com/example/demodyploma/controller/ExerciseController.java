@@ -2,7 +2,6 @@ package com.example.demodyploma.controller;
 
 import com.example.demodyploma.entity.ExerciseEntity;
 import com.example.demodyploma.repository.ExerciseEntityRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +20,25 @@ public class ExerciseController {
         this.exerciseEntityRepository = exerciseEntityRepository;
     }
 
-    @GetMapping(value = "/getExercises", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/exercise", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExerciseEntity>> getExercises() {
         return ResponseEntity.ok(exerciseEntityRepository.findAll());
     }
 
-    @GetMapping(value = "/getExercises/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/exercise/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<ExerciseEntity> getExercise(@PathVariable Long id) {
         return exerciseEntityRepository.findById(id);
     }
 
-    @PutMapping("/replaceExercise")
-    public void replaceExercise(@RequestBody ExerciseEntity exercise) {
+    @PutMapping("/exercise")
+    public ResponseEntity<ExerciseEntity> putExercise(@RequestBody ExerciseEntity exercise) {
         exerciseEntityRepository.save(exercise);
+        return ResponseEntity.ok().body(exercise);
+    }
+
+    @DeleteMapping("/exercise/{id}")
+    public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
+        exerciseEntityRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
